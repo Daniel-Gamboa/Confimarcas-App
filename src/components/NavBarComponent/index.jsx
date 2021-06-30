@@ -1,10 +1,11 @@
+import {CartWidget} from '../CartWidgeth';
 import './style.css';
 
 export const NavBarComponent = ({cart}) => {
     return (
        <>
        <div>
-			<img src="/imagenes/logosin.png" width="200" height="100"/>
+			<CartWidget/>
         </div>
         <nav className="navegacion navbar-expand-md navbar-light">
             <div className="container-fluid">
