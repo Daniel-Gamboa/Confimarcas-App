@@ -8,7 +8,7 @@ export const HomeContainer = () => {
     return (
         <div>
             <NavBarComponent cart={carrito}/>
-            <ItemListContainer greeting={'Hola, soy un greeting'}/>
+            {/* <ItemListContainer greeting={'Hola, soy un greeting'}/> */}
 
         </div>
     )
