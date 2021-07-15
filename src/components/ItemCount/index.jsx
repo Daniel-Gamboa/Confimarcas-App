@@ -4,7 +4,7 @@ import { useState } from "react"
 let stock = 10
 let cantidadMinima = 1
 
-export const ItemCount = () => {
+export const ItemCount = ({onAdd}) => {
     const [contador, setContador] = useState(1)
 
     function disminucion() {
@@ -31,7 +31,8 @@ export const ItemCount = () => {
             <button onClick={() =>{incremento()}}>+</button>
         </section>
         <section>
-            <button>Agregar al Carrito</button>
+            <button onClick={()=> {onAdd({})
+            }}>Agregar al Carrito</button>
         </section>
         </>
     )

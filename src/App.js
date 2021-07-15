@@ -5,6 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import {HomeContainer} from './containers/HomeContainer';
 import { ItemDetailContainer } from './containers/ItemDetailContainer';
 import { ItemListContainer } from './containers/ItemListContainer';
+import { VacioComponent} from './components/VacioComponent'
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
 
           <Route exact path={'/item/:id'}>
             <ItemDetailContainer />
+          </Route>
+
+          <Route exact path={'/cart'}>
+            <VacioComponent />
           </Route>
 
           {/* <Route path={"*"} component={() => <h1>Error 404</h1>} /> */}

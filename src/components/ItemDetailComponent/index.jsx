@@ -5,8 +5,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ItemCount } from "../../components/ItemCount";
 import { Typography } from '@material-ui/core';
+import { useState } from 'react';
+import { Link } from  'react-router-dom'
 
 export function ItemDetailComponent({ img, nombre, descripcion, precio, stock }) {
+  const [carrito, setCarrito] = useState([])
+  const [isAdded, setIsAdded] = useState(false)
+  function onAdd (producto){
+    setCarrito(...carrito, producto)
+    setIsAdded(true)
+  }
   return (
     <>
       <Container>
@@ -21,7 +29,10 @@ export function ItemDetailComponent({ img, nombre, descripcion, precio, stock })
               <h5>{descripcion}</h5>
               <h5>Stock: {stock} </h5>
             </Typography>
-            <ItemCount />
+            {isAdded ? <Link to
+            ={'/cart'}> <button>Terminar mi compra</button></Link>:
+            <ItemCount onAdd={onAdd}/>
+            }
           </Col>
         </Row>
       </Container>
