@@ -4,31 +4,44 @@ import { Container } from "react-bootstrap";
 import { ItemDetailComponent } from "../../components/ItemDetailComponent";
 import listaProductos from "../../BD/productos.json";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { ShopContext } from "../../context/ShopContext";
 
 export function ItemDetailContainer() {
-  const [producto, setProducto] = useState([]);
+  const [producto, setProducto] = useState({});
+  const {title} = useParams();
+  const CONTEXT = useContext(ShopContext);
 
-  const { id } = useParams();
+  // const [producto, setProducto] = useState([]);
 
-  useEffect(() => {
-    const promesa = new Promise((resolve, reject) => {
-      resolve(listaProductos);
-    });
+  // const { id } = useParams();
 
-    if (id) {
-      promesa.then(data => {
-        const idProducto = data.find(producto => producto.id === parseInt(id))
-        setProducto(idProducto)
-        console.log('hola yo soy el producto con id #', id);
-      })
-    }
-  }, [])
+  useEffect(() => { 
+    console.log(CONTEXT.listProducts)
+    const result = CONTEXT.listProducts.find(element => element.title == title)
+    setProducto(result)
+
+    // const promesa = new Promise((resolve, reject) => {
+    //   resolve(listaProductos);
+    }, [title])
+
+  //   if (id) {
+  //     promesa.then(data => {
+  //       const idProducto = data.find(producto => producto.id === parseInt(id))
+  //       setProducto(idProducto)
+  //       console.log('hola yo soy el producto con id #', id);
+  //     })
+  //   }
+  // }, [])
 
   return (
     <>
-      <Container>
+      <div>
+        {producto.title} - <b>{producto.price}</b>
+      </div>
+      {/* <Container>
         <ItemDetailComponent key={producto.id} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} stock={producto.stock} />
-      </Container>
+      </Container> */}
     </>
   )
 };

@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { ItemComponent } from "../../components/Item";
 import listaProductos from "../../BD/productos.json";
 import { useParams } from "react-router-dom";
+import { ShopContext } from "../../context/ShopContext";
 
 export function ItemListContainer() {
+
+  const CONTEXT = useContext(ShopContext);
+  console.log(CONTEXT);
+  
   const [listadoProductos, setListadoProductos] = useState([]);
 
   const { id } = useParams();
