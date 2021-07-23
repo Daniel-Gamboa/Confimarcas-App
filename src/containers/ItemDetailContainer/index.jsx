@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { ItemDetailComponent } from "../../components/ItemDetailComponent";
-import listaProductos from "../../BD/productos.json";
+import productos from "../../BD/productos.json";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../../context/ShopContext";
@@ -37,7 +37,7 @@ export function ItemDetailContainer() {
   return (
     <>
       <div>
-        {producto.title} - <b>{producto.price}</b>
+        {producto.nombre} - <b>{producto.precio}</b>
       </div>
       {/* <Container>
         <ItemDetailComponent key={producto.id} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} stock={producto.stock} />

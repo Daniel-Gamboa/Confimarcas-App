@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { ItemComponent } from "../../components/Item";
-import listaProductos from "../../BD/productos.json";
+import productos from "../../BD/productos.json";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../../context/ShopContext";
 
@@ -18,7 +18,7 @@ export function ItemListContainer() {
   useEffect(() => {
     const promesa = new Promise((resolve, reject) => {
       setTimeout(function () {
-        resolve(listaProductos);
+        resolve(productos);
       }, 1000);
     });
 
@@ -41,7 +41,7 @@ export function ItemListContainer() {
     <>
       <div>
         {
-          listadoProductos.map(producto => {
+          productos.map(producto => {
             return (
               <>
                 <Container>
