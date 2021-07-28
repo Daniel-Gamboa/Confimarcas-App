@@ -1,47 +1,29 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { ItemDetailComponent } from "../../components/ItemDetailComponent";
-import productos from "../../BD/productos.json";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
 import { ShopContext } from "../../context/ShopContext";
 
 export function ItemDetailContainer() {
-  const [producto, setProducto] = useState({});
-  const {title} = useParams();
-  const CONTEXT = useContext(ShopContext);
+  const [producto, setProducto] = useState([]);
 
-  // const [producto, setProducto] = useState([]);
+  const { id } = useParams();
+  const { products, setAddToCart, setIsAdded } = useContext(ShopContext)
 
-  // const { id } = useParams();
-
-  useEffect(() => { 
-    console.log(CONTEXT.listProducts)
-    const result = CONTEXT.listProducts.find(element => element.title == title)
-    setProducto(result)
-
-    // const promesa = new Promise((resolve, reject) => {
-    //   resolve(listaProductos);
-    }, [title])
-
-  //   if (id) {
-  //     promesa.then(data => {
-  //       const idProducto = data.find(producto => producto.id === parseInt(id))
-  //       setProducto(idProducto)
-  //       console.log('hola yo soy el producto con id #', id);
-  //     })
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (id) {
+      const idProducto = products.find(product => product.id === parseInt(id))
+      setProducto(idProducto);
+      setAddToCart(false);
+      setIsAdded(false);
+    }
+  }, [id])
 
   return (
     <>
-      <div>
-        {producto.nombre} - <b>{producto.precio}</b>
-      </div>
-      {/* <Container>
-        <ItemDetailComponent key={producto.id} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} stock={producto.stock} />
-      </Container> */}
+      <Container >
+        <ItemDetailComponent key={producto.id} id={producto.id} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} stock={producto.stock} />
+      </Container>
     </>
   )
 };

@@ -1,10 +1,8 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { ShopContext } from "../../context/ShopContext" 
 
-
-let stock = 10
-let cantidadMinima = 1
-
-export const ItemCount = ({onAdd}) => {
+export const ItemCount = ({cantidadMinima, stock}) => {
+    const { setQuantity } = useContext(ShopContext)
     const [contador, setContador] = useState(1)
 
     function disminucion() {
@@ -22,7 +20,10 @@ export const ItemCount = ({onAdd}) => {
         if (contador === stock)
         alert ('No tenemos mas unides disponibles de este producto')
     };
-       
+    
+    const cantidad = contador;
+    setQuantity(cantidad);
+
     return(
         <>
         <section>
@@ -30,12 +31,7 @@ export const ItemCount = ({onAdd}) => {
             {contador}
             <button onClick={() =>{incremento()}}>+</button>
         </section>
-        <section>
-            <button onClick={()=> {onAdd({})
-            }}>Agregar al Carrito</button>
-        </section>
         </>
     )
 }
 
-export default ItemCount

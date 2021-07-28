@@ -1,57 +1,37 @@
-import { useContext, useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { ItemComponent } from "../../components/Item";
-import productos from "../../BD/productos.json";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../../context/ShopContext";
 
 export function ItemListContainer() {
-
-  const CONTEXT = useContext(ShopContext);
-  console.log(CONTEXT);
-  
-  const [listadoProductos, setListadoProductos] = useState([]);
+  const { products } = useContext(ShopContext)
+  const [listaCategorias, setListaCategorias] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
-    const promesa = new Promise((resolve, reject) => {
-      setTimeout(function () {
-        resolve(productos);
-      }, 1000);
-    });
-
     if (id) {
-      promesa.then(data => {
-        const categoria = data.filter(producto => producto.categoriaId === id)
-        setListadoProductos(categoria)
-        console.log('hola yo soy la categoria:', id);
-      })
-
+      const categoria = products.filter(producto => producto.categoriaId === id);
+      setListaCategorias(categoria);
     } else {
-      promesa.then(data => {
-        setListadoProductos(data);
-        console.log('no hay categoría en especifico, traigo todos los productos');
-      })
+      setListaCategorias(products);
     }
   }, [id])
 
   return (
     <>
-      <div>
-        {
-          productos.map(producto => {
-            return (
-              <>
-                <Container>
-                  <ItemComponent key={producto.id} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} id={producto.id} />
-                </Container>
-              </>
-            )
-          })
-        }
-      </div>
+      {
+        listaCategorias.map((producto, index) => {
+          return (
+            <>
+              <Container>
+                <ItemComponent key={index} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} id={producto.id} />
+              </Container>
+            </>
+          )
+        })
+      }
     </>
   )
 }
