@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import productos from "../BD/productos.json"
+import { getFirestore } from "../firebase";
 
 // crear el contexto
 export const ShopContext = createContext();
@@ -62,16 +63,26 @@ export function  ShopProvider ({ children }) {
   };
 
   useEffect(() => {
-    function traerData() {
-      setTimeout(() => {
-        new Promise((resolve, reject) => {
-          resolve(productos);
-          setProducts(productos);
-        });
-      }, 2000)
-    };
+    async function getDataFromFirestore() {
 
-    traerData();
+      const DB = getFirestore ();   // Conectando a la base de datos
+      const COLLECTION = DB.collection('Productos confimarcas'); // Tomando la coleccion de productos
+      const response = await COLLECTION.get();
+      setProducts(response.docs.map(element => element.data()));
+      
+    }
+    getDataFromFirestore();
+
+    async function getDataFromFirestoreFromDocument() {
+
+      const DB = getFirestore ();   // Conectando a la base de datos
+      const Document = DB.collection('Productos confimarcas').doc('c3IB0wAjVUnDIXdNxOgk'); // Tomando el documento
+      const response = await Document.get();
+      console.log(response.data());
+      // setProducts(response.docs.map(element => element.data()));
+      
+    }
+    getDataFromFirestoreFromDocument();
   }, [])
 
   return (
