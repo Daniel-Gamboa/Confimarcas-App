@@ -4,15 +4,15 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import {HomeContainer} from './containers/HomeContainer';
 import { ItemDetailContainer } from './containers/ItemDetailContainer';
 import { ItemListContainer } from './containers/ItemListContainer';
-import { VacioComponent} from './components/VacioComponent'
-import { ShopProvider} from './context/ShopContext';
+import { CartProvider } from './context/CartContext';
+import { CartComponent } from './components/Cart';
 
 function App() {
 
  
   return (
     <>
-    <ShopProvider>
+    <CartProvider>
     <BrowserRouter>
         <HomeContainer />
         <Switch>
@@ -29,14 +29,14 @@ function App() {
           </Route>
 
           <Route exact path={'/cart'}>
-            <VacioComponent />
+            <CartComponent />
           </Route>
 
           {/* <Route path={"*"} component={() => <h1>Error 404</h1>} /> */}
         </Switch>
 
       </BrowserRouter>
-      </ShopProvider>
+      </CartProvider>
     </>
   );
 }

@@ -6,12 +6,13 @@ import Col from 'react-bootstrap/Col';
 import { ItemCount } from "../../components/ItemCount";
 import { Typography } from '@material-ui/core';
 import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 import { Button } from "react-bootstrap";
 import { Link } from  'react-router-dom'
-import { ShopContext } from '../../context/ShopContext';
 
 export function ItemDetailComponent({ img, nombre, descripcion, precio, stock, id }) {
-  const { onAdd, addToCart, isAdded, quantity } = useContext(ShopContext)
+  const { onAdd, addToCart, isAdded, quantity } = useContext(CartContext)
+
 
   return (
     <>

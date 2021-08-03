@@ -31,3 +31,6 @@
       .navegacion ul li:hover ul {
         display: block;
         z-index: 1; }
+
+        #logo {
+          width: 250px; }

@@ -1,11 +1,9 @@
-import './style.css';
-import {Link} from 'react-router-dom'
+import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
 
-export const CartWidget = () => {
+
+export const CartWidget = () => {    
     return(
-        <>
-        <Link to= {`/`}><img src="/imagenes/logosin.png" id="logo"/></Link>
-        </>
+        <ShoppingCartOutlined />
     )
 }
 

@@ -1,8 +1,9 @@
 import { useState, useContext } from "react"
-import { ShopContext } from "../../context/ShopContext" 
+import { CartContext } from "../../context/CartContext";
+
 
 export const ItemCount = ({cantidadMinima, stock}) => {
-    const { setQuantity } = useContext(ShopContext)
+    const { setQuantity } = useContext(CartContext)
     const [contador, setContador] = useState(1)
 
     function disminucion() {
