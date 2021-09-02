@@ -1,20 +1,20 @@
+import './style.css';
 import { useEffect, useState, useContext } from "react";
-import { Container } from "react-bootstrap";
-import { ItemComponent } from "../../components/Item";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { getFirestore } from "../../firebase";
+import { ItemComponent } from "../../components/Item";
+import { Container, Row, Spinner } from "react-bootstrap";
 
 export function ItemListContainer() {
-  const { products } = useContext(CartContext)
+  const { listadoProductos } = useContext(CartContext)
   const [listaCategorias, setListaCategorias] = useState([]);
-
   const { id } = useParams();
 
   useEffect(() => {
     if (id) {
       const BD = getFirestore();
-      const collection = BD.collection('Productos confimarcas');
+      const collection = BD.collection('productos');
       const response = collection.where('categoryId', "==", id).get();
       response.then((result) => {
         setListaCategorias(result.docs.map(element => ({ id: element.id, ...element.data() })));
@@ -23,23 +23,31 @@ export function ItemListContainer() {
         console.log('error', error)
       });
     } else {
-      setListaCategorias(products);
+      setListaCategorias(listadoProductos);
     }
   }, [id])
 
   return (
     <>
-      {
-        listaCategorias.map((producto) => {
-          return (
-            <>
-              <Container>
-                <ItemComponent key={producto.id} img={producto.imagen} nombre={producto.nombre} descripcion={producto.descripcion} precio={producto.precio} id={producto.id} />
-              </Container>
-            </>
-          )
-        })
-      }
+      <Container>
+        <Row>
+          <h3 className="title text-center">{id}</h3>
+          <div className="cards-group">
+            {
+              listaCategorias.length > 0 ?
+                listaCategorias.map((producto) => {
+                  return (
+                    <>
+                      <ItemComponent key={producto.id} img={producto.img} name={producto.title}  sku={producto.SKU} price={producto.price} id={producto.id} />
+                    </>
+                  )
+                })
+                :
+                <Spinner animation="border" variant="info" />
+            }
+          </div>
+        </Row>
+      </Container>
     </>
   )
-}
+};

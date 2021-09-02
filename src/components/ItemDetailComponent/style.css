@@ -1,4 +1,38 @@
 .imgProducto {
-    width: 200px;
-    height: 200px;
-}
+    width: 400px;
+    height: 400px;
+  }
+  
+  .breadcrumb {
+    background-color: white;
+    padding: 5px;
+  }
+  
+  .row-description {
+    margin-top: 20px;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .buttonAddToCart {
+    color: white;
+    width: 400px;
+    margin: auto;
+    background-color: #659dfd;
+    border: solid #659dfd 1px;
+  }
+  
+  .buttonAddToCart:hover {
+    color: white;
+    background-color: #2364D2;
+  }
+  
+  .goToCart, .goToCart:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #2364D2;
+  border: solid #2364D2 1px;
+  }
+  

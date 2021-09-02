@@ -1,18 +1,21 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom'
+import './style.css';
+import { Link } from 'react-router-dom';
+import { Card, CardGroup } from 'react-bootstrap';
 
-export function ItemComponent( {nombre, precio, img, id} ) {
-    return (
-        <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={img} alt={nombre}/>
+export function ItemComponent({ img, name, sku, price, id }) {
+  return (
+    <CardGroup>
+      <Card className="card-style" >
+        <Card.Img className="img-card" variant="top" src={img} alt={name} />
         <Card.Body>
-            <Card.Title>{nombre}</Card.Title>
-            <Card.Text>
-                $ {precio}
-            </Card.Text>
-            <Button variant="outline-primary"><Link to={`/item/${id}`}> Ver producto </Link></Button>
+          <Card.Title>{name}</Card.Title>
+          <Card.Text>SKU: {sku}</Card.Text>
+          <Card.Text className="price-card">$ {price}</Card.Text>
         </Card.Body>
-    </Card>
-    )
+        <Card.Footer className="footer-card">
+          <Link to={`/item/${id}`} className="link">Ver Producto</Link>
+        </Card.Footer>
+      </Card>
+    </CardGroup>
+  )
 };

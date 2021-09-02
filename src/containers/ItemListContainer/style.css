@@ -1,0 +1,15 @@
+.title {
+    text-transform: capitalize;
+  };
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .cards-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-right: 35px;
+    padding-left: 35px;
+  }

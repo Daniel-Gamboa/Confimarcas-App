@@ -1,46 +1,46 @@
-import {BrowserRouter, Switch, Route } from 'react-router-dom';
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import {HomeContainer} from './containers/HomeContainer';
-import { ItemDetailContainer } from './containers/ItemDetailContainer';
-import { ItemListContainer } from './containers/ItemListContainer';
-import { CartProvider } from './context/CartContext';
-import { CartComponent } from './components/Cart';
+import "./App.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import { CartComponent } from "./components/Cart";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { NavbarComponent } from "./components/NavbarComponent";
+import { HomeContainer } from "./containers/HomeContainer";
+import { ItemListContainer } from "./containers/ItemListContainer";
+import { ItemDetailContainer } from "./containers/ItemDetailContainer";
+import { CartProvider } from "./context/CartContext";
+import { FooterComponent } from "./components/Footer";
 
 function App() {
-
- 
   return (
     <>
-    <CartProvider>
-    <BrowserRouter>
-        <HomeContainer />
-        <Switch>
-          <Route exact path={'/'}>
-            <ItemListContainer />
-          </Route>
+      <CartProvider >
+        <BrowserRouter>
+          <NavbarComponent />
 
-          <Route exact path={'/category/:id'}>
-            <ItemListContainer />
-          </Route>
+          <Switch>
+            <Route exact path={'/'}>
+              <HomeContainer greeting={'¡Conoce nuestras categorias!'} />
+            </Route>
 
-          <Route exact path={'/item/:id'}>
-            <ItemDetailContainer />
-          </Route>
+            <Route exact path={'/category/:id'}>
+              <ItemListContainer />
+            </Route>
 
-          <Route exact path={'/cart'}>
-            <CartComponent />
-          </Route>
+            <Route exact path={'/item/:id'}>
+              <ItemDetailContainer />
+            </Route>
 
-          {/* <Route path={"*"} component={() => <h1>Error 404</h1>} /> */}
-        </Switch>
+            <Route exact path={'/cart'}>
+              <CartComponent />
+            </Route>
 
-      </BrowserRouter>
+            <Route path={"*"} component={() => <h1>Error 404</h1>} />
+          </Switch>
+
+          <FooterComponent />
+        </BrowserRouter>
       </CartProvider>
     </>
   );
 }
 
 export default App;
-
-
